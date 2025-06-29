@@ -184,7 +184,7 @@ const DATABASE_NAME = void 0;
 const DATABASE_PASS = void 0;
 const DATABASE_USER = void 0;
 if (!cachedPool) {
-  console.log(DATABASE_NAME);
+  console.log(`${DATABASE_NAME} ===> here`);
   cachedPool = global.mysqlPool = mysql.createPool({
     host: DATABASE_HOST,
     port: Number(DATABASE_PORT) || 3306,
@@ -197,6 +197,7 @@ if (!cachedPool) {
   });
 }
 async function getConnection() {
+  console.log(`${DATABASE_HOST} ===> here`);
   console.log(DATABASE_HOST);
   console.log("hello");
   return cachedPool.getConnection();
