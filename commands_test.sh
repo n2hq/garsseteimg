@@ -4,8 +4,13 @@
 set -e
 
 
+echo "🌿  Renaming branch to main..."
+git branch -M main
+
+
 echo "🔁 Setting remote to TEST repo..."
 git remote set-url origin https://github.com/n2hq/garsseteimg.git
+
 
 
 echo "🧪 Switching to 'main' branch..."
@@ -13,7 +18,7 @@ git checkout main || git checkout -b main
 
 
 echo "🔄 Pulling latest changes..."
-git pull origin main
+#git pull origin main
 
 
 echo "🛠  Building TEST..."
