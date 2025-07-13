@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: "tpics",
+            name: "pics",
             script: "npm",
             args: "start",
             env: {

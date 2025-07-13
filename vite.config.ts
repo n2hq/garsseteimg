@@ -24,6 +24,8 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   server: {//dev server
+    host: true, // allow external access
+    allowedHosts: ["pics.gasimg.com", "tpics.gasimg.com"], // <-- your domain here
     hmr: {
       port: 4441, // or any other available port
     },
