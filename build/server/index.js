@@ -180,9 +180,9 @@ function DoResponse(json, code = 500) {
 let cachedPool = global.mysqlPool || null;
 const DATABASE_HOST = "localhost";
 const DATABASE_PORT = "3306";
-const DATABASE_NAME = "garssete";
+const DATABASE_NAME = "comvoinh_dbdirtest";
 const DATABASE_PASS = "Querty123$$$$";
-const DATABASE_USER = "garssete_user";
+const DATABASE_USER = "comvoinh_dbdirtest";
 if (!cachedPool) {
   console.log(`${DATABASE_NAME} ===> here`);
   cachedPool = global.mysqlPool = mysql.createPool({

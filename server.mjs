@@ -8,8 +8,17 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 dotenv.config();
 
+let baseOrigin = ""
 
-const ALLOWED_ORIGIN = process.env.VITE_ALLOWED_ORIGIN || "https://garssete.com";
+if (process.env.VITE_ENV === "prod") {
+  baseOrigin = "https://garssete.com"
+} else if (process.env.VITE_ENV === "test") {
+  baseOrigin = "https://garssete.gasimg.com"
+} else {
+  baseOrigin = "http://localhost:3393"
+}
+
+const ALLOWED_ORIGIN = process.env.VITE_ALLOWED_ORIGIN || baseOrigin;
 
 const viteDevServer =
   process.env.NODE_ENV === "production"
