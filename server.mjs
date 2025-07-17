@@ -23,15 +23,15 @@ import { fileURLToPath } from 'url';
 
 let baseOrigin = ""
 
-if (process.env.VITE_ENV === "prod") {
+if (process.env.NODE_ENV === "production") {
   baseOrigin = "https://garssete.com"
-} else if (process.env.VITE_ENV === "test") {
+} else if (process.env.NODE_ENV === "test") {
   baseOrigin = "https://garssete.gasimg.com"
 } else {
   baseOrigin = "http://localhost:3393"
 }
 
-const ALLOWED_ORIGIN = process.env.VITE_ALLOWED_ORIGIN || baseOrigin;
+const ALLOWED_ORIGIN = baseOrigin;
 
 const viteDevServer =
   process.env.NODE_ENV === "production"
