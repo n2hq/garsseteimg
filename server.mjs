@@ -31,6 +31,8 @@ if (process.env.NODE_ENV === "production") {
   baseOrigin = "http://localhost:3393"
 }
 
+console.log(`Allowed origin: ${baseOrigin}`)
+
 const ALLOWED_ORIGIN = baseOrigin;
 
 const viteDevServer =
