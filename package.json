@@ -10,6 +10,7 @@
     "build": "env-cmd -f ./env/.env.dev remix vite:build",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
     "start": "cross-env NODE_ENV=production node ./server.mjs",
+    "test": "cross-env NODE_ENV=test node ./server.mjs",
     "typecheck": "tsc"
   },
   "dependencies": {
