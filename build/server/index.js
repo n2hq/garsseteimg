@@ -319,12 +319,12 @@ const action$4 = async ({ request }) => {
     const fileUrl = `/business_profile_pics/${uniqueName}`;
     const mimeType = file.type;
     const imageGuid = crypto.randomUUID();
-    const [exists] = await query(
+    const exists = await query(
       `SELECT * FROM tbl_business_profile_image WHERE user_guid = ? AND business_guid = ?`,
       [guid, bid]
     );
     if (exists.length === 0) {
-      const [result] = await query(
+      const result = await query(
         `INSERT INTO tbl_business_profile_image (image_filename, user_guid, image_guid, business_guid, image_url, mimetype)
          VALUES (?, ?, ?, ?, ?, ?)`,
         [uniqueName, guid, imageGuid, bid, fileUrl, mimeType]
