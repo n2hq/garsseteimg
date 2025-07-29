@@ -19,16 +19,18 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-
+let PROD = "https://edition.garssete.com"
+let TEST = "https://garssete.gasimg.com"
+let DEVLOCAL = "https://localhost:3393"
 
 let baseOrigin = ""
 
 if (process.env.NODE_ENV === "production") {
-  baseOrigin = "https://garssete.com"
+  baseOrigin = PROD
 } else if (process.env.NODE_ENV === "test") {
-  baseOrigin = "https://garssete.gasimg.com"
+  baseOrigin = TEST
 } else {
-  baseOrigin = "http://localhost:3393"
+  baseOrigin = DEVLOCAL
 }
 
 console.log(`Allowed origin: ${baseOrigin}`)
