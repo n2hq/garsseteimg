@@ -71,8 +71,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             }, 200);
         } else {
             // Delete old file
-
-            const oldFilePath = path.join(userProfileUploadsDir, (exists as any).image_filename);
+            const existingImage = (exists as any);
+            const oldFilePath = path.join(userProfileUploadsDir, existingImage.image_filename);
             console.log(oldFilePath)
 
 

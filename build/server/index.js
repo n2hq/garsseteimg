@@ -180,9 +180,9 @@ function DoResponse(json, code = 500) {
 let cachedPool = global.mysqlPool || null;
 const DATABASE_HOST = "localhost";
 const DATABASE_PORT = "3306";
-const DATABASE_NAME = "garssete_test";
+const DATABASE_NAME = "garssete";
 const DATABASE_PASS = "Querty123$$$$";
-const DATABASE_USER = "garssete_test_user";
+const DATABASE_USER = "garssete_user";
 if (!cachedPool) {
   console.log(`${DATABASE_NAME} ===> here`);
   cachedPool = global.mysqlPool = mysql.createPool({
@@ -253,7 +253,8 @@ const action$5 = async ({ request }) => {
         insertId: result.insertId
       }, 200);
     } else {
-      const oldFilePath = path.join(userProfileUploadsDir, exists.image_filename);
+      const existingImage = exists;
+      const oldFilePath = path.join(userProfileUploadsDir, existingImage.image_filename);
       console.log(oldFilePath);
       try {
         await fs.unlink(oldFilePath);
@@ -338,7 +339,7 @@ const action$4 = async ({ request }) => {
         200
       );
     } else {
-      const existingImage = exists;
+      const existingImage = exists[0];
       const existingPath = path.join(businessProfileUploadsDir, existingImage.image_filename);
       try {
         await fs.unlink(existingPath);

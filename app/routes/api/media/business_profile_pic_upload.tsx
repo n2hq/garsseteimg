@@ -76,7 +76,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             );
         } else {
             // Delete old file
-            const existingImage = (exists as any);
+            const existingImage = (exists[0] as any);
             const existingPath = path.join(businessProfileUploadsDir, existingImage.image_filename);
 
             try {

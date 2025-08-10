@@ -21,7 +21,7 @@ import { fileURLToPath } from 'url';
 
 let PROD = "https://edition.garssete.com"
 let TEST = "https://garssete.gasimg.com"
-let DEVLOCAL = "https://localhost:3393"
+let DEVLOCAL = "http://localhost:3393"
 
 let baseOrigin = ""
 
