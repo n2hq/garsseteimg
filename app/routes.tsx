@@ -10,7 +10,8 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/business_gallery_pic_upload", "routes/api/media/business_gallery_pic_upload.tsx");
         route("/business_gallery_pic_update", "routes/api/media/business_gallery_pic_update.tsx");
         route("/delete_business_gallery_pic", "routes/api/media/delete_business_gallery_pic.tsx");
-
+        route("/business_gallery_product_upload", "routes/api/media/business_gallery_product_upload.tsx");
+        route("/business_gallery_product_update", "routes/api/media/business_gallery_product_update.tsx");
 
 
         route("/info", "routes/api/media/info.tsx");

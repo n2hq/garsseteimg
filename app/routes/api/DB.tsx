@@ -14,7 +14,7 @@ const DATABASE_USER = import.meta.env.VITE_DATABASE_USER
 
 
 if (!cachedPool) {
-    console.log(`${DATABASE_NAME} ===> here`)
+    //console.log(`${DATABASE_NAME} ===> here`)
     cachedPool = global.mysqlPool = mysql.createPool({
         host: DATABASE_HOST as string,
         port: Number(DATABASE_PORT) || 3306,
@@ -28,9 +28,8 @@ if (!cachedPool) {
 }
 
 export async function getConnection(): Promise<PoolConnection> {
-    console.log(`${DATABASE_HOST} ===> here`)
-    console.log(DATABASE_HOST)
-    console.log('hello')
+    console.log(`${DATABASE_USER} accessed connection`)
+
     return cachedPool!.getConnection()
 }
 

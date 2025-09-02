@@ -180,11 +180,10 @@ function DoResponse(json, code = 500) {
 let cachedPool = global.mysqlPool || null;
 const DATABASE_HOST = "localhost";
 const DATABASE_PORT = "3306";
-const DATABASE_NAME = "garssete_test";
+const DATABASE_NAME = "garssete";
 const DATABASE_PASS = "Querty123$$$$";
-const DATABASE_USER = "garssete_test_user";
+const DATABASE_USER = "garssete_user";
 if (!cachedPool) {
-  console.log(`${DATABASE_NAME} ===> here`);
   cachedPool = global.mysqlPool = mysql.createPool({
     host: DATABASE_HOST,
     port: Number(DATABASE_PORT) || 3306,
@@ -197,9 +196,7 @@ if (!cachedPool) {
   });
 }
 async function getConnection() {
-  console.log(`${DATABASE_HOST} ===> here`);
-  console.log(DATABASE_HOST);
-  console.log("hello");
+  console.log(`${DATABASE_USER} accessed connection`);
   return cachedPool.getConnection();
 }
 async function query(sql, values = []) {
@@ -213,10 +210,10 @@ async function query(sql, values = []) {
   }
 }
 const userProfileUploadsDir = path.resolve("public/user_profile_pics");
-const loader$5 = async ({ request, params }) => {
+const loader$7 = async ({ request, params }) => {
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$5 = async ({ request }) => {
+const action$7 = async ({ request }) => {
   var _a;
   try {
     const formData = await request.formData();
@@ -279,11 +276,11 @@ const action$5 = async ({ request }) => {
 };
 const route2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$5,
-  loader: loader$5
+  action: action$7,
+  loader: loader$7
 }, Symbol.toStringTag, { value: "Module" }));
 const businessProfileUploadsDir = path.resolve("public/business_profile_pics");
-const loader$4 = async ({ request, params }) => {
+const loader$6 = async ({ request, params }) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -298,7 +295,7 @@ const loader$4 = async ({ request, params }) => {
   }
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$4 = async ({ request }) => {
+const action$6 = async ({ request }) => {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
@@ -367,11 +364,11 @@ const action$4 = async ({ request }) => {
 };
 const route3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$4,
-  loader: loader$4
+  action: action$6,
+  loader: loader$6
 }, Symbol.toStringTag, { value: "Module" }));
 const businessGalleryUploadsDir = path.resolve("public/business_gallery_pics");
-const loader$3 = async ({ request, params }) => {
+const loader$5 = async ({ request, params }) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -386,7 +383,7 @@ const loader$3 = async ({ request, params }) => {
   }
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$3 = async ({ request }) => {
+const action$5 = async ({ request }) => {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
@@ -430,11 +427,11 @@ const action$3 = async ({ request }) => {
 };
 const route4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$3,
-  loader: loader$3
+  action: action$5,
+  loader: loader$5
 }, Symbol.toStringTag, { value: "Module" }));
-const galleryDir$1 = path.resolve("public/business_gallery_pics");
-const loader$2 = async ({ request, params }) => {
+const galleryDir$2 = path.resolve("public/business_gallery_pics");
+const loader$4 = async ({ request, params }) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -449,7 +446,7 @@ const loader$2 = async ({ request, params }) => {
   }
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$2 = async ({ request }) => {
+const action$4 = async ({ request }) => {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
@@ -477,9 +474,9 @@ const action$2 = async ({ request }) => {
       const ext = path.extname(file.name);
       const uniqueName = `${Date.now()}_${uuidname}${ext}`;
       const buffer = Buffer.from(await file.arrayBuffer());
-      const filePath = path.join(galleryDir$1, uniqueName);
+      const filePath = path.join(galleryDir$2, uniqueName);
       await writeFile(filePath, buffer);
-      const oldFilePath = path.join(galleryDir$1, existingRecord.image_filename);
+      const oldFilePath = path.join(galleryDir$2, existingRecord.image_filename);
       try {
         await unlink(oldFilePath);
       } catch (err) {
@@ -510,11 +507,11 @@ const action$2 = async ({ request }) => {
 };
 const route5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$2,
-  loader: loader$2
+  action: action$4,
+  loader: loader$4
 }, Symbol.toStringTag, { value: "Module" }));
-const galleryDir = path.resolve("public/business_gallery_pics");
-const loader$1 = async ({ request, params }) => {
+const galleryDir$1 = path.resolve("public/business_gallery_pics");
+const loader$3 = async ({ request, params }) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -529,7 +526,7 @@ const loader$1 = async ({ request, params }) => {
   }
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$1 = async ({ request }) => {
+const action$3 = async ({ request }) => {
   try {
     const contentType = request.headers.get("Content-Type");
     if (!(contentType == null ? void 0 : contentType.includes("application/json"))) {
@@ -549,7 +546,7 @@ const action$1 = async ({ request }) => {
     if (!image) {
       return DoResponse({ message: "Image does not exist" }, 200);
     }
-    const imagePath = path.join(galleryDir, image.image_filename);
+    const imagePath = path.join(galleryDir$1, image.image_filename);
     try {
       await unlink(imagePath);
       console.log(`Deleted old file: ${imagePath}`);
@@ -578,6 +575,191 @@ const action$1 = async ({ request }) => {
 };
 const route6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
+  action: action$3,
+  loader: loader$3
+}, Symbol.toStringTag, { value: "Module" }));
+const businessProductGalleryUploadsDir = path.resolve("public/business_gallery_products");
+const loader$2 = async ({ request, params }) => {
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:3393",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Credentials": "true"
+        // optional
+      }
+    });
+  }
+  return DoResponse({ error: "method not allowed" }, 405);
+};
+const action$2 = async ({ request }) => {
+  try {
+    const formData = await request.formData();
+    const file = formData.get("file");
+    const guid = formData.get("guid");
+    const bid = formData.get("bid");
+    const productTitle = formData.get("product_title");
+    const productDescription = formData.get("product_description");
+    const productLink = formData.get("product_link");
+    if (!file || typeof file === "string") {
+      return DoResponse({ message: "No file uploaded" }, 405);
+    }
+    if (!guid || !bid || !productTitle) {
+      return DoResponse({ message: "Missing required fields. Product title is compulsory" }, 400);
+    }
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const ext = path.extname(file.name);
+    const uuidname = crypto$1.randomUUID();
+    const uniqueName = `${Date.now()}_${uuidname}${ext}`;
+    await fs.mkdir(businessProductGalleryUploadsDir, { recursive: true });
+    const filePath = path.join(businessProductGalleryUploadsDir, uniqueName);
+    await fs.writeFile(filePath, buffer);
+    const imageFileUrl = `/business_gallery_products/${uniqueName}`;
+    const mimeType = file.type;
+    const productGuid = crypto$1.randomUUID();
+    const result = await query(
+      `INSERT INTO tbl_business_gallery_products
+      (product_image_filename, user_guid, product_guid, product_image_url, mimetype, business_guid, product_title, product_description, product_link)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        uniqueName,
+        guid,
+        productGuid,
+        imageFileUrl,
+        mimeType,
+        bid,
+        productTitle,
+        productDescription,
+        productLink
+      ]
+    );
+    return DoResponse(
+      {
+        message: "File uploaded and saved to database successfully",
+        imageFileUrl,
+        insertId: result.insertId
+      },
+      200
+    );
+  } catch (error) {
+    console.error("Upload error:", error);
+    return DoResponse({ message: error.message || "Database save failed" }, 500);
+  }
+};
+const route7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$2,
+  loader: loader$2
+}, Symbol.toStringTag, { value: "Module" }));
+const galleryDir = path.resolve("public/business_gallery_pics");
+const loader$1 = async ({ request, params }) => {
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:3393",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Credentials": "true"
+        // optional
+      }
+    });
+  }
+  return DoResponse({ error: "method not allowed" }, 405);
+};
+const action$1 = async ({ request }) => {
+  try {
+    const formData = await request.formData();
+    const file = formData.get("file");
+    const userGuid = formData.get("guid");
+    const businessGuid = formData.get("bid");
+    const productGuid = formData.get("product_guid");
+    const productTitle = formData.get("product_title") || "";
+    const productDescription = formData.get("product_description") || "";
+    const productLink = formData.get("product_link") || "";
+    console.log(formData);
+    if (!userGuid || !businessGuid || !productGuid) {
+      return DoResponse({ error: "Missing required fields" }, 400);
+    }
+    const [existing] = await query(
+      `SELECT * FROM tbl_business_gallery_products
+            WHERE
+            user_guid = ?
+            AND
+            business_guid = ?
+            AND
+            product_guid = ?`,
+      [userGuid, businessGuid, productGuid]
+    );
+    const existingRecord = existing;
+    if (!existingRecord) {
+      return DoResponse({ error: "Product does not exist" }, 404);
+    }
+    let fileUrl = existingRecord.product_image_url;
+    let originalName = existingRecord.product_image_filename;
+    let mimeType = existingRecord.mimetype;
+    if (file) {
+      console.log("herebol");
+      const uuidname = crypto$1.randomUUID();
+      const ext = path.extname(file.name);
+      const uniqueName = `${Date.now()}_${uuidname}${ext}`;
+      const buffer = Buffer.from(await file.arrayBuffer());
+      const filePath = path.join(galleryDir, uniqueName);
+      await writeFile(filePath, buffer);
+      const oldFilePath = path.join(galleryDir, existingRecord.product_image_filename);
+      try {
+        await unlink(oldFilePath);
+      } catch (err) {
+        if (err.code !== "ENOENT") console.error("Failed to delete old image:", err);
+      }
+      fileUrl = `/business_gallery_products/${uniqueName}`;
+      originalName = uniqueName;
+      mimeType = file.type;
+    }
+    const result = await query(
+      `UPDATE tbl_business_gallery_products
+            SET
+            product_image_filename = ?,
+            product_image_url = ?,
+            mimetype = ?,
+            product_title = ?,
+            product_description = ?,
+            product_link = ? 
+            WHERE
+            user_guid = ?
+            AND
+            business_guid = ?
+            AND
+            product_guid = ?`,
+      [
+        originalName,
+        fileUrl,
+        mimeType,
+        productTitle,
+        productDescription,
+        productLink,
+        userGuid,
+        businessGuid,
+        productGuid
+      ]
+    );
+    return DoResponse(
+      {
+        message: "Gallery image updated successfully",
+        fileUrl,
+        insertId: existingRecord.id
+      },
+      200
+    );
+  } catch (err) {
+    console.error("Error updating gallery image:", err);
+    return DoResponse({ message: err.message || "Update failed" }, 500);
+  }
+};
+const route8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
   action: action$1,
   loader: loader$1
 }, Symbol.toStringTag, { value: "Module" }));
@@ -595,12 +777,12 @@ const action = async ({ request }) => {
     message: "Hello"
   }, 200);
 };
-const route7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   action,
   loader
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-Ai_1fLJU.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-UtfmbdUD.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-DdTteooJ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-UtfmbdUD.js"], "css": ["/assets/root-DABPeJSW.css"] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-BlkbRRZ-.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/api/media/user_profile_pic_upload": { "id": "routes/api/media/user_profile_pic_upload", "parentId": "root", "path": "/user_profile_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_profile_pic_upload": { "id": "routes/api/media/business_profile_pic_upload", "parentId": "root", "path": "/business_profile_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_pic_upload": { "id": "routes/api/media/business_gallery_pic_upload", "parentId": "root", "path": "/business_gallery_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_pic_update": { "id": "routes/api/media/business_gallery_pic_update", "parentId": "root", "path": "/business_gallery_pic_update", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_pic_update-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/delete_business_gallery_pic": { "id": "routes/api/media/delete_business_gallery_pic", "parentId": "root", "path": "/delete_business_gallery_pic", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/delete_business_gallery_pic-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/info": { "id": "routes/api/media/info", "parentId": "root", "path": "/info", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/info-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-96ebee09.js", "version": "96ebee09" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-Ai_1fLJU.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-UtfmbdUD.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-DdTteooJ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-UtfmbdUD.js"], "css": ["/assets/root-DABPeJSW.css"] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-BlkbRRZ-.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/api/media/user_profile_pic_upload": { "id": "routes/api/media/user_profile_pic_upload", "parentId": "root", "path": "/user_profile_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_profile_pic_upload": { "id": "routes/api/media/business_profile_pic_upload", "parentId": "root", "path": "/business_profile_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_pic_upload": { "id": "routes/api/media/business_gallery_pic_upload", "parentId": "root", "path": "/business_gallery_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_pic_update": { "id": "routes/api/media/business_gallery_pic_update", "parentId": "root", "path": "/business_gallery_pic_update", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_pic_update-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/delete_business_gallery_pic": { "id": "routes/api/media/delete_business_gallery_pic", "parentId": "root", "path": "/delete_business_gallery_pic", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/delete_business_gallery_pic-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_product_upload": { "id": "routes/api/media/business_gallery_product_upload", "parentId": "root", "path": "/business_gallery_product_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_product_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_product_update": { "id": "routes/api/media/business_gallery_product_update", "parentId": "root", "path": "/business_gallery_product_update", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_product_update-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/info": { "id": "routes/api/media/info", "parentId": "root", "path": "/info", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/info-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-1d000bdd.js", "version": "1d000bdd" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";
@@ -665,13 +847,29 @@ const routes = {
     caseSensitive: void 0,
     module: route6
   },
+  "routes/api/media/business_gallery_product_upload": {
+    id: "routes/api/media/business_gallery_product_upload",
+    parentId: "root",
+    path: "/business_gallery_product_upload",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route7
+  },
+  "routes/api/media/business_gallery_product_update": {
+    id: "routes/api/media/business_gallery_product_update",
+    parentId: "root",
+    path: "/business_gallery_product_update",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route8
+  },
   "routes/api/media/info": {
     id: "routes/api/media/info",
     parentId: "root",
     path: "/info",
     index: void 0,
     caseSensitive: void 0,
-    module: route7
+    module: route9
   }
 };
 export {
