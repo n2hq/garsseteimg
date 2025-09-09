@@ -238,7 +238,8 @@ const action$8 = async ({ request }) => {
       `SELECT * FROM tbl_user_profile_image WHERE user_guid = ?`,
       [guid]
     );
-    if (exists.length === 0) {
+    const existingRecord = exists;
+    if (!existingRecord) {
       const [result] = await query(
         `INSERT INTO tbl_user_profile_image (image_filename, user_guid, image_guid, image_url, mimetype)
          VALUES (?, ?, ?, ?, ?)`,

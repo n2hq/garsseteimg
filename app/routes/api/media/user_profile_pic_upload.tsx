@@ -56,8 +56,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         );
 
 
-
-        if ((exists as any[]).length === 0) {
+        const existingRecord = (exists as any);
+        if (!existingRecord) {
             const [result] = await query(
                 `INSERT INTO tbl_user_profile_image (image_filename, user_guid, image_guid, image_url, mimetype)
          VALUES (?, ?, ?, ?, ?)`,
