@@ -6,6 +6,8 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/", "routes/_index.tsx");
 
         route("/user_profile_pic_upload", "routes/api/media/user_profile_pic_upload.tsx");
+        route("/user_profile_bg_upload", "routes/api/media/user_profile_bg_upload.tsx");
+
         route("/business_profile_pic_upload", "routes/api/media/business_profile_pic_upload.tsx");
         route("/business_profile_bg_upload", "routes/api/media/business_profile_bg_upload.tsx");
         route("/business_gallery_pic_upload", "routes/api/media/business_gallery_pic_upload.tsx");
