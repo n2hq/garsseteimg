@@ -13,6 +13,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/business_gallery_pic_upload", "routes/api/media/business_gallery_pic_upload.tsx");
         route("/business_gallery_pic_update", "routes/api/media/business_gallery_pic_update.tsx");
         route("/delete_business_gallery_pic", "routes/api/media/delete_business_gallery_pic.tsx");
+        route("/delete_business_product", "routes/api/media/delete_business_product.tsx");
         route("/business_gallery_product_upload", "routes/api/media/business_gallery_product_upload.tsx");
         route("/business_gallery_product_update", "routes/api/media/business_gallery_product_update.tsx");
 

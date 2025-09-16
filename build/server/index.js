@@ -210,10 +210,10 @@ async function query(sql, values = []) {
   }
 }
 const userProfileUploadsDir$1 = path.resolve("public/user_profile_pics");
-const loader$9 = async ({ request, params }) => {
+const loader$a = async ({ request, params }) => {
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$9 = async ({ request }) => {
+const action$a = async ({ request }) => {
   var _a;
   try {
     const formData = await request.formData();
@@ -277,11 +277,11 @@ const action$9 = async ({ request }) => {
 };
 const route2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$9,
-  loader: loader$9
+  action: action$a,
+  loader: loader$a
 }, Symbol.toStringTag, { value: "Module" }));
 const userProfileUploadsDir = path.resolve("public/user_profile_bg");
-const loader$8 = async ({ request, params }) => {
+const loader$9 = async ({ request, params }) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -296,7 +296,7 @@ const loader$8 = async ({ request, params }) => {
   }
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$8 = async ({ request }) => {
+const action$9 = async ({ request }) => {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
@@ -361,11 +361,11 @@ const action$8 = async ({ request }) => {
 };
 const route3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$8,
-  loader: loader$8
+  action: action$9,
+  loader: loader$9
 }, Symbol.toStringTag, { value: "Module" }));
 const businessProfileUploadsDir$1 = path.resolve("public/business_profile_pics");
-const loader$7 = async ({ request, params }) => {
+const loader$8 = async ({ request, params }) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -380,7 +380,7 @@ const loader$7 = async ({ request, params }) => {
   }
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$7 = async ({ request }) => {
+const action$8 = async ({ request }) => {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
@@ -449,11 +449,11 @@ const action$7 = async ({ request }) => {
 };
 const route4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$7,
-  loader: loader$7
+  action: action$8,
+  loader: loader$8
 }, Symbol.toStringTag, { value: "Module" }));
 const businessProfileUploadsDir = path.resolve("public/business_profile_bg");
-const loader$6 = async ({ request, params }) => {
+const loader$7 = async ({ request, params }) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -468,7 +468,7 @@ const loader$6 = async ({ request, params }) => {
   }
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$6 = async ({ request }) => {
+const action$7 = async ({ request }) => {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
@@ -537,11 +537,11 @@ const action$6 = async ({ request }) => {
 };
 const route5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$6,
-  loader: loader$6
+  action: action$7,
+  loader: loader$7
 }, Symbol.toStringTag, { value: "Module" }));
 const businessGalleryUploadsDir = path.resolve("public/business_gallery_pics");
-const loader$5 = async ({ request, params }) => {
+const loader$6 = async ({ request, params }) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -556,7 +556,7 @@ const loader$5 = async ({ request, params }) => {
   }
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$5 = async ({ request }) => {
+const action$6 = async ({ request }) => {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
@@ -600,11 +600,11 @@ const action$5 = async ({ request }) => {
 };
 const route6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$5,
-  loader: loader$5
+  action: action$6,
+  loader: loader$6
 }, Symbol.toStringTag, { value: "Module" }));
-const galleryDir$2 = path.resolve("public/business_gallery_pics");
-const loader$4 = async ({ request, params }) => {
+const galleryDir$3 = path.resolve("public/business_gallery_pics");
+const loader$5 = async ({ request, params }) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -619,7 +619,7 @@ const loader$4 = async ({ request, params }) => {
   }
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$4 = async ({ request }) => {
+const action$5 = async ({ request }) => {
   try {
     const formData = await request.formData();
     const file = formData.get("file");
@@ -647,9 +647,9 @@ const action$4 = async ({ request }) => {
       const ext = path.extname(file.name);
       const uniqueName = `${Date.now()}_${uuidname}${ext}`;
       const buffer = Buffer.from(await file.arrayBuffer());
-      const filePath = path.join(galleryDir$2, uniqueName);
+      const filePath = path.join(galleryDir$3, uniqueName);
       await writeFile(filePath, buffer);
-      const oldFilePath = path.join(galleryDir$2, existingRecord.image_filename);
+      const oldFilePath = path.join(galleryDir$3, existingRecord.image_filename);
       try {
         await unlink(oldFilePath);
       } catch (err) {
@@ -680,11 +680,11 @@ const action$4 = async ({ request }) => {
 };
 const route7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$4,
-  loader: loader$4
+  action: action$5,
+  loader: loader$5
 }, Symbol.toStringTag, { value: "Module" }));
-const galleryDir$1 = path.resolve("public/business_gallery_pics");
-const loader$3 = async ({ request, params }) => {
+const galleryDir$2 = path.resolve("public/business_gallery_pics");
+const loader$4 = async ({ request, params }) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
@@ -699,7 +699,7 @@ const loader$3 = async ({ request, params }) => {
   }
   return DoResponse({ error: "method not allowed" }, 405);
 };
-const action$3 = async ({ request }) => {
+const action$4 = async ({ request }) => {
   try {
     const contentType = request.headers.get("Content-Type");
     if (!(contentType == null ? void 0 : contentType.includes("application/json"))) {
@@ -719,7 +719,7 @@ const action$3 = async ({ request }) => {
     if (!image) {
       return DoResponse({ message: "Image does not exist" }, 200);
     }
-    const imagePath = path.join(galleryDir$1, image.image_filename);
+    const imagePath = path.join(galleryDir$2, image.image_filename);
     try {
       await unlink(imagePath);
       console.log(`Deleted old file: ${imagePath}`);
@@ -747,6 +747,75 @@ const action$3 = async ({ request }) => {
   }
 };
 const route8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$4,
+  loader: loader$4
+}, Symbol.toStringTag, { value: "Module" }));
+const galleryDir$1 = path.resolve("public/business_gallery_products");
+const loader$3 = async ({ request, params }) => {
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:3393",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Credentials": "true"
+        // optional
+      }
+    });
+  }
+  return DoResponse({ error: "method not allowed" }, 405);
+};
+const action$3 = async ({ request }) => {
+  try {
+    const contentType = request.headers.get("Content-Type");
+    if (!(contentType == null ? void 0 : contentType.includes("application/json"))) {
+      return DoResponse({ error: "Invalid content type. Expected JSON." }, 415);
+    }
+    const body = await request.json();
+    const { guid: userGuid, bid: businessGuid, product_guid: productGuid } = body;
+    if (!userGuid || !businessGuid || !productGuid) {
+      console.log("here");
+      return DoResponse({ error: "Missing required fields" }, 400);
+    }
+    const [existingImageRecord] = await query(
+      `SELECT * FROM tbl_business_gallery_products
+       WHERE user_guid = ? AND business_guid = ? AND product_guid = ?`,
+      [userGuid, businessGuid, productGuid]
+    );
+    const product = existingImageRecord;
+    if (!product) {
+      return DoResponse({ message: "Product does not exist" }, 200);
+    }
+    const imagePath = path.join(galleryDir$1, product.product_image_filename);
+    try {
+      await unlink(imagePath);
+      console.log(`Deleted old file: ${imagePath}`);
+    } catch (err) {
+      if (err.code !== "ENOENT") {
+        console.error("Error deleting file:", err);
+        return DoResponse({ error: "File deletion failed" }, 500);
+      }
+    }
+    await query(
+      `DELETE FROM tbl_business_gallery_products
+       WHERE user_guid = ? AND business_guid = ? AND product_guid = ?`,
+      [userGuid, businessGuid, productGuid]
+    );
+    return DoResponse(
+      {
+        message: "File deleted successfully",
+        insertId: product.id
+      },
+      200
+    );
+  } catch (error) {
+    console.error("Deletion error:", error);
+    return DoResponse({ error: error.message || "Deletion failed" }, 500);
+  }
+};
+const route9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   action: action$3,
   loader: loader$3
@@ -777,7 +846,7 @@ const action$2 = async ({ request }) => {
     const productDescription = formData.get("product_description");
     const productLink = formData.get("product_link");
     if (!file || typeof file === "string") {
-      return DoResponse({ message: "No file uploaded" }, 405);
+      return DoResponse({ message: "No file selected" }, 405);
     }
     if (!guid || !bid || !productTitle) {
       return DoResponse({ message: "Missing required fields. Product title is compulsory" }, 400);
@@ -821,7 +890,7 @@ const action$2 = async ({ request }) => {
     return DoResponse({ message: error.message || "Database save failed" }, 500);
   }
 };
-const route9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   action: action$2,
   loader: loader$2
@@ -931,7 +1000,7 @@ const action$1 = async ({ request }) => {
     return DoResponse({ message: err.message || "Update failed" }, 500);
   }
 };
-const route10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   action: action$1,
   loader: loader$1
@@ -950,12 +1019,12 @@ const action = async ({ request }) => {
     message: "Hello"
   }, 200);
 };
-const route11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   action,
   loader
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-Ai_1fLJU.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-UtfmbdUD.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-DdTteooJ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-UtfmbdUD.js"], "css": ["/assets/root-DABPeJSW.css"] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-BlkbRRZ-.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/api/media/user_profile_pic_upload": { "id": "routes/api/media/user_profile_pic_upload", "parentId": "root", "path": "/user_profile_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/user_profile_bg_upload": { "id": "routes/api/media/user_profile_bg_upload", "parentId": "root", "path": "/user_profile_bg_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_bg_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_profile_pic_upload": { "id": "routes/api/media/business_profile_pic_upload", "parentId": "root", "path": "/business_profile_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_profile_bg_upload": { "id": "routes/api/media/business_profile_bg_upload", "parentId": "root", "path": "/business_profile_bg_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_bg_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_pic_upload": { "id": "routes/api/media/business_gallery_pic_upload", "parentId": "root", "path": "/business_gallery_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_pic_update": { "id": "routes/api/media/business_gallery_pic_update", "parentId": "root", "path": "/business_gallery_pic_update", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_pic_update-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/delete_business_gallery_pic": { "id": "routes/api/media/delete_business_gallery_pic", "parentId": "root", "path": "/delete_business_gallery_pic", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/delete_business_gallery_pic-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_product_upload": { "id": "routes/api/media/business_gallery_product_upload", "parentId": "root", "path": "/business_gallery_product_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_product_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_product_update": { "id": "routes/api/media/business_gallery_product_update", "parentId": "root", "path": "/business_gallery_product_update", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_product_update-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/info": { "id": "routes/api/media/info", "parentId": "root", "path": "/info", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/info-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-0b501d3f.js", "version": "0b501d3f" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-Ai_1fLJU.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-UtfmbdUD.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-DdTteooJ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-UtfmbdUD.js"], "css": ["/assets/root-DABPeJSW.css"] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-BlkbRRZ-.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/api/media/user_profile_pic_upload": { "id": "routes/api/media/user_profile_pic_upload", "parentId": "root", "path": "/user_profile_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/user_profile_bg_upload": { "id": "routes/api/media/user_profile_bg_upload", "parentId": "root", "path": "/user_profile_bg_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_bg_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_profile_pic_upload": { "id": "routes/api/media/business_profile_pic_upload", "parentId": "root", "path": "/business_profile_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_profile_bg_upload": { "id": "routes/api/media/business_profile_bg_upload", "parentId": "root", "path": "/business_profile_bg_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_bg_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_pic_upload": { "id": "routes/api/media/business_gallery_pic_upload", "parentId": "root", "path": "/business_gallery_pic_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_pic_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_pic_update": { "id": "routes/api/media/business_gallery_pic_update", "parentId": "root", "path": "/business_gallery_pic_update", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_pic_update-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/delete_business_gallery_pic": { "id": "routes/api/media/delete_business_gallery_pic", "parentId": "root", "path": "/delete_business_gallery_pic", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/delete_business_gallery_pic-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/delete_business_product": { "id": "routes/api/media/delete_business_product", "parentId": "root", "path": "/delete_business_product", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/delete_business_product-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_product_upload": { "id": "routes/api/media/business_gallery_product_upload", "parentId": "root", "path": "/business_gallery_product_upload", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_product_upload-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/business_gallery_product_update": { "id": "routes/api/media/business_gallery_product_update", "parentId": "root", "path": "/business_gallery_product_update", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery_product_update-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/media/info": { "id": "routes/api/media/info", "parentId": "root", "path": "/info", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/info-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-f1c705cf.js", "version": "f1c705cf" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";
@@ -1036,13 +1105,21 @@ const routes = {
     caseSensitive: void 0,
     module: route8
   },
+  "routes/api/media/delete_business_product": {
+    id: "routes/api/media/delete_business_product",
+    parentId: "root",
+    path: "/delete_business_product",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route9
+  },
   "routes/api/media/business_gallery_product_upload": {
     id: "routes/api/media/business_gallery_product_upload",
     parentId: "root",
     path: "/business_gallery_product_upload",
     index: void 0,
     caseSensitive: void 0,
-    module: route9
+    module: route10
   },
   "routes/api/media/business_gallery_product_update": {
     id: "routes/api/media/business_gallery_product_update",
@@ -1050,7 +1127,7 @@ const routes = {
     path: "/business_gallery_product_update",
     index: void 0,
     caseSensitive: void 0,
-    module: route10
+    module: route11
   },
   "routes/api/media/info": {
     id: "routes/api/media/info",
@@ -1058,7 +1135,7 @@ const routes = {
     path: "/info",
     index: void 0,
     caseSensitive: void 0,
-    module: route11
+    module: route12
   }
 };
 export {

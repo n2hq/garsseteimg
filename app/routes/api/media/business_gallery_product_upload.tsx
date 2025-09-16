@@ -36,7 +36,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         const productLink = formData.get("product_link") as string | null;
 
         if (!file || typeof file === "string") {
-            return DoResponse({ message: "No file uploaded" }, 405);
+            return DoResponse({ message: "No file selected" }, 405);
         }
 
         if (!guid || !bid || !productTitle) {
