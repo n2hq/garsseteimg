@@ -567,7 +567,7 @@ const action$6 = async ({ request }) => {
       return DoResponse({ message: "No file uploaded" }, 405);
     }
     if (!guid || !bid || !imageTitle) {
-      return DoResponse({ message: "Missing required fields" }, 400);
+      return DoResponse({ message: "Please enter picture title." }, 400);
     }
     const buffer = Buffer.from(await file.arrayBuffer());
     const ext = path.extname(file.name);

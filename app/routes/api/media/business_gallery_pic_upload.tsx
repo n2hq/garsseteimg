@@ -38,7 +38,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         }
 
         if (!guid || !bid || !imageTitle) {
-            return DoResponse({ message: "Missing required fields" }, 400);
+            return DoResponse({ message: "Please enter picture title." }, 400);
         }
 
         const buffer = Buffer.from(await file.arrayBuffer());
