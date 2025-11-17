@@ -19,9 +19,13 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-let PROD = "https://edition.garssete.com"
-let TEST = "https://garssete.gasimg.com"
-let DEVLOCAL = "http://localhost:3393"
+//let PROD = "https://edition.garssete.com"
+//let TEST = "https://garssete.gasimg.com"
+//let DEVLOCAL = "http://localhost:3393"
+
+let PROD = "https://index.veycet.com"
+let TEST = "https://testindex.veycet.com"
+let DEVLOCAL = "http://localhost:7500"
 
 let baseOrigin = ""
 

@@ -25,7 +25,7 @@ export default defineConfig({
   ],
   server: {//dev server
     host: true, // allow external access
-    allowedHosts: ["pics.gasimg.com", "tpics.gasimg.com", "garssete.gasimg.com", "edition.garssete.com"], // <-- your domain here
+    allowedHosts: ["pics.gasimg.com", "tpics.gasimg.com", "garssete.gasimg.com", "edition.garssete.com", "index.veycet.com", "veycet.com"], // <-- your domain here
     hmr: {
       port: 4441, // or any other available port
     },
