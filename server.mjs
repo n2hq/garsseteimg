@@ -23,8 +23,8 @@ import { fileURLToPath } from 'url';
 //let TEST = "https://garssete.gasimg.com"
 //let DEVLOCAL = "http://localhost:3393"
 
-let PROD = "https://index.bycet.com"
-let TEST = "https://testindex.bycet.com"
+let PROD = "https://bycet.com"
+let TEST = "https://test.bycet.com"
 let DEVLOCAL = "http://localhost:7500"
 
 let baseOrigin = ""
