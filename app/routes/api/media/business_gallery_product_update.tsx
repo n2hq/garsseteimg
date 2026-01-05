@@ -5,7 +5,7 @@ import crypto from "crypto";
 import { query } from "../DB";
 import { DoResponse } from "~/lib/lib";
 
-const galleryDir = path.resolve("public/business_gallery_pics");
+const galleryDir = path.resolve("public/business_gallery_products");
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     if (request.method === "OPTIONS") {
@@ -34,6 +34,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         const productGuid = formData.get("product_guid") as string;
         const productTitle = (formData.get("product_title") as string) || "";
         const productDescription = (formData.get("product_description") as string) || "";
+        const productAmount = (formData.get("product_amount") as string) || "";
+        const productCurrencyCountryId = (formData.get("product_currency_country_id") as string) || "";
         const productLink = (formData.get("product_link") as string) || "";
         console.log(formData)
 
@@ -63,6 +65,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         let mimeType = existingRecord.mimetype;
 
         if (file) {
+            console.log(file)
             console.log('herebol')
             // Generate unique name
             const uuidname = crypto.randomUUID();
@@ -70,13 +73,14 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             const uniqueName = `${Date.now()}_${uuidname}${ext}`;
             const buffer = Buffer.from(await file.arrayBuffer());
             const filePath = path.join(galleryDir, uniqueName);
-
+            console.log(filePath)
             await writeFile(filePath, buffer);
 
             // Delete old image
             const oldFilePath = path.join(galleryDir, existingRecord.product_image_filename);
             try {
                 await unlink(oldFilePath);
+                console.log('done')
             } catch (err: any) {
                 if (err.code !== "ENOENT") console.error("Failed to delete old image:", err);
             }
@@ -96,7 +100,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             mimetype = ?,
             product_title = ?,
             product_description = ?,
-            product_link = ? 
+            product_link = ?,
+            product_amount = ?,
+            product_currency_country_id = ?
             WHERE
             user_guid = ?
             AND
@@ -110,6 +116,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                 productTitle,
                 productDescription,
                 productLink,
+                productAmount,
+                productCurrencyCountryId,
                 userGuid,
                 businessGuid,
                 productGuid

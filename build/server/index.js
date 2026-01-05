@@ -180,9 +180,9 @@ function DoResponse(json, code = 500) {
 let cachedPool = global.mysqlPool || null;
 const DATABASE_HOST = "localhost";
 const DATABASE_PORT = "3306";
-const DATABASE_NAME = "garssete";
+const DATABASE_NAME = "garssete_test";
 const DATABASE_PASS = "Querty123$$$$";
-const DATABASE_USER = "garssete_user";
+const DATABASE_USER = "garssete_test_user";
 if (!cachedPool) {
   cachedPool = global.mysqlPool = mysql.createPool({
     host: DATABASE_HOST,
@@ -844,6 +844,8 @@ const action$2 = async ({ request }) => {
     const bid = formData.get("bid");
     const productTitle = formData.get("product_title");
     const productDescription = formData.get("product_description");
+    const productAmount = formData.get("product_amount") || "";
+    const productCurrencyCountryId = formData.get("product_currency_country_id") || "";
     const productLink = formData.get("product_link");
     if (!file || typeof file === "string") {
       return DoResponse({ message: "No file selected" }, 405);
@@ -863,8 +865,18 @@ const action$2 = async ({ request }) => {
     const productGuid = crypto$1.randomUUID();
     const result = await query(
       `INSERT INTO tbl_business_gallery_products
-      (product_image_filename, user_guid, product_guid, product_image_url, mimetype, business_guid, product_title, product_description, product_link)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            (product_image_filename,
+            user_guid,
+            product_guid,
+            product_image_url,
+            mimetype,
+            business_guid,
+            product_title,
+            product_description,
+            product_link,
+            product_amount,
+            product_currency_country_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         uniqueName,
         guid,
@@ -874,7 +886,9 @@ const action$2 = async ({ request }) => {
         bid,
         productTitle,
         productDescription,
-        productLink
+        productLink,
+        productAmount,
+        productCurrencyCountryId
       ]
     );
     return DoResponse(
@@ -895,7 +909,7 @@ const route10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   action: action$2,
   loader: loader$2
 }, Symbol.toStringTag, { value: "Module" }));
-const galleryDir = path.resolve("public/business_gallery_pics");
+const galleryDir = path.resolve("public/business_gallery_products");
 const loader$1 = async ({ request, params }) => {
   if (request.method === "OPTIONS") {
     return new Response(null, {
@@ -920,6 +934,8 @@ const action$1 = async ({ request }) => {
     const productGuid = formData.get("product_guid");
     const productTitle = formData.get("product_title") || "";
     const productDescription = formData.get("product_description") || "";
+    const productAmount = formData.get("product_amount") || "";
+    const productCurrencyCountryId = formData.get("product_currency_country_id") || "";
     const productLink = formData.get("product_link") || "";
     console.log(formData);
     if (!userGuid || !businessGuid || !productGuid) {
@@ -943,16 +959,19 @@ const action$1 = async ({ request }) => {
     let originalName = existingRecord.product_image_filename;
     let mimeType = existingRecord.mimetype;
     if (file) {
+      console.log(file);
       console.log("herebol");
       const uuidname = crypto$1.randomUUID();
       const ext = path.extname(file.name);
       const uniqueName = `${Date.now()}_${uuidname}${ext}`;
       const buffer = Buffer.from(await file.arrayBuffer());
       const filePath = path.join(galleryDir, uniqueName);
+      console.log(filePath);
       await writeFile(filePath, buffer);
       const oldFilePath = path.join(galleryDir, existingRecord.product_image_filename);
       try {
         await unlink(oldFilePath);
+        console.log("done");
       } catch (err) {
         if (err.code !== "ENOENT") console.error("Failed to delete old image:", err);
       }
@@ -968,7 +987,9 @@ const action$1 = async ({ request }) => {
             mimetype = ?,
             product_title = ?,
             product_description = ?,
-            product_link = ? 
+            product_link = ?,
+            product_amount = ?,
+            product_currency_country_id = ?
             WHERE
             user_guid = ?
             AND
@@ -982,6 +1003,8 @@ const action$1 = async ({ request }) => {
         productTitle,
         productDescription,
         productLink,
+        productAmount,
+        productCurrencyCountryId,
         userGuid,
         businessGuid,
         productGuid

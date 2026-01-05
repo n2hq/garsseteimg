@@ -33,6 +33,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         const bid = formData.get("bid") as string | null;
         const productTitle = formData.get("product_title") as string | null;
         const productDescription = formData.get("product_description") as string | null;
+        const productAmount = (formData.get("product_amount") as string) || "";
+        const productCurrencyCountryId = (formData.get("product_currency_country_id") as string) || "";
+
         const productLink = formData.get("product_link") as string | null;
 
         if (!file || typeof file === "string") {
@@ -59,8 +62,18 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
         const result = await query(
             `INSERT INTO tbl_business_gallery_products
-      (product_image_filename, user_guid, product_guid, product_image_url, mimetype, business_guid, product_title, product_description, product_link)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            (product_image_filename,
+            user_guid,
+            product_guid,
+            product_image_url,
+            mimetype,
+            business_guid,
+            product_title,
+            product_description,
+            product_link,
+            product_amount,
+            product_currency_country_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 uniqueName,
                 guid,
@@ -70,7 +83,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                 bid,
                 productTitle,
                 productDescription,
-                productLink
+                productLink,
+                productAmount,
+                productCurrencyCountryId
             ]
         );
 
