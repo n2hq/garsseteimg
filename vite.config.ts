@@ -34,7 +34,9 @@ export default defineConfig({
       "veycet.com",
       "testindex.veycet.com",
       "bycet.com",
-      "test.bycet.com"
+      "test.bycet.com",
+      "ashthor.com",
+      "test.ashthor.com"
     ], // <-- your domain here
     hmr: {
       port: 4441, // or any other available port
